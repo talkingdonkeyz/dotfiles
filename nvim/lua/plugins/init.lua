@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -14,21 +14,72 @@ return {
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+
+    -- pull in your options table
     opts = function()
       return require "configs.null-ls"
+    end,
+
+    -- call setup with those options
+    config = function(_, opts)
+      require("null-ls").setup(opts)
     end,
   },
 
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+
+      local tools = {
         "clangd",
-        "clang-format",
+        "elixir-ls",
         "rust-analyzer",
+        "html-lsp",
+        "css-lsp",
+        "typescript-language-server",
+        "prisma-language-server",
+        "eslint-lsp",
+        "prettier",
       }
-    }
+      vim.list_extend(opts.ensure_installed, tools)
+    end,
+  },
+
+  -- Obsidian vault integration for Neovim
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    ft = { "markdown", "quarto" },
+    cmd = {
+      "ObsidianNew",
+      "ObsidianQuickSwitch",
+      "ObsidianOpen",
+      "ObsidianFollowLink",
+      "ObsidianBacklinks",
+      "ObsidianToday",
+      "ObsidianYesterday",
+      "ObsidianTomorrow",
+      "ObsidianSearch",
+      "ObsidianLink",
+      "ObsidianLinkNew",
+      "ObsidianTemplate",
+      "ObsidianWorkspace",
+      "ObsidianPasteImg",
+      "ObsidianRename",
+      "ObsidianTags",
+    },
+    config = function()
+      require "configs.obsidian"
+    end,
   },
 
   {
@@ -47,7 +98,7 @@ return {
       logging = true,
       lang = "elixir", -- default language set to Elixir
     },
-  }
+  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
