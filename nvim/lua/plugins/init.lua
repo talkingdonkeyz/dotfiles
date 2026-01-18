@@ -49,6 +49,26 @@ return {
     end,
   },
 
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    build = ":Copilot auth",
+    dependencies = {
+      "zbirenbaum/copilot-cmp",
+    },
+    config = function()
+      require("configs.copilot").setup()
+    end,
+  },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+    },
+  },
+
   -- Obsidian vault integration for Neovim
   {
     "epwalsh/obsidian.nvim",
