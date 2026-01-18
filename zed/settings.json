@@ -7,25 +7,53 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "disable_ai": true,
+  "disable_ai": false,
   "telemetry": {
     "metrics": false
   },
   "ssh_connections": [
     {
       "host": "macbox",
+      "args": [],
       "projects": [
         {
-          "paths": ["/Users/ec2-user/junketcloud"]
+          "paths": [
+            "/Users/ec2-user/junketcloud"
+          ]
         },
         {
-          "paths": ["/home/ubuntu/hiveos"]
+          "paths": [
+            "/home/ubuntu/hiveos"
+          ]
         }
       ]
     },
     {
       "host": "devbox",
-      "projects": []
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/ubuntu/hiveos"
+          ]
+        },
+        {
+          "paths": [
+            "/home/ubuntu/meetingsdk-headless-linux-sample"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "london",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/ubuntu/zoomsdk"
+          ]
+        }
+      ]
     }
   ],
   "ui_font_size": 16,
