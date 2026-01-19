@@ -28,4 +28,10 @@ for dir in "$DOTFILES_DIR"/*/; do
   echo "Linked $target → $dir"
 done
 
+# Install TPM if not present
+if [ ! -d "$CONFIG_DIR/tmux/plugins/tpm" ]; then
+  echo "Installing TPM..."
+  git clone https://github.com/tmux-plugins/tpm "$CONFIG_DIR/tmux/plugins/tpm"
+fi
+
 echo "✅ All config folders linked!"
