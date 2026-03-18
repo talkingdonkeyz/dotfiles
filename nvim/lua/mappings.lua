@@ -17,4 +17,7 @@ map("n", "<leader>ct", "<cmd>Copilot toggle<CR>", { desc = "Copilot: Toggle" })
 map("n", "<leader>cs", "<cmd>Copilot status<CR>", { desc = "Copilot: Status" })
 map("n", "<leader>cp", "<cmd>Copilot panel<CR>", { desc = "Copilot: Open panel" })
 
+-- NoNeckPain
+map("n", "<leader>z", "<cmd>NoNeckPain<CR>", { desc = "Toggle NoNeckPain" })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

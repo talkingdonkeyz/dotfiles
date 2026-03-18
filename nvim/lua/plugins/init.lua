@@ -44,6 +44,7 @@ return {
         "prisma-language-server",
         "eslint-lsp",
         "prettier",
+        "marksman",
       }
       vim.list_extend(opts.ensure_installed, tools)
     end,
@@ -69,37 +70,30 @@ return {
     },
   },
 
-  -- Obsidian vault integration for Neovim
   {
-    "epwalsh/obsidian.nvim",
+    "shortcuts/no-neck-pain.nvim",
     version = "*",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "hrsh7th/nvim-cmp",
+    cmd = "NoNeckPain",
+    opts = {
+      width = 100,
     },
+  },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "quarto" },
-    cmd = {
-      "ObsidianNew",
-      "ObsidianQuickSwitch",
-      "ObsidianOpen",
-      "ObsidianFollowLink",
-      "ObsidianBacklinks",
-      "ObsidianToday",
-      "ObsidianYesterday",
-      "ObsidianTomorrow",
-      "ObsidianSearch",
-      "ObsidianLink",
-      "ObsidianLinkNew",
-      "ObsidianTemplate",
-      "ObsidianWorkspace",
-      "ObsidianPasteImg",
-      "ObsidianRename",
-      "ObsidianTags",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      require "configs.obsidian"
-    end,
+    opts = {
+      win_options = {
+        conceallevel = {
+          default = 1,
+          rendered = 2,
+        },
+      },
+    },
   },
 
   {
@@ -129,6 +123,7 @@ return {
       ensure_installed = {
         "vim", "lua", "vimdoc",
         "html", "css", "elixir", "heex",
+        "markdown", "markdown_inline",
       },
     },
   },

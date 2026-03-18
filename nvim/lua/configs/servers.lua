@@ -7,6 +7,7 @@ local servers = {
   "ts_ls",
   "prismals",
   "eslint",
+  "marksman",
 }
 
 return servers
