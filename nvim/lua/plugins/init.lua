@@ -118,6 +118,49 @@ return {
   -- { import = "nvchad.blink.lazyspec" },
 
   {
+    "johannww/tts.nvim",
+    cmd = { "TTS", "TTSFile" },
+    keys = {
+      { "<leader>rs", ":'<,'>TTS<cr>", mode = "v", desc = "Read selection aloud" },
+    },
+    opts = {
+      backend = "edge",
+      languages_to_voice = {
+        edge = {
+          ["en"] = "en-GB-RyanNeural",
+        },
+      },
+    },
+    config = function(_, opts)
+      -- Point the backend script at the tts venv python
+      local venv_python = vim.fn.expand("~/.local/share/nvim/tts-venv/bin/python3")
+      local plugin_dir = vim.fn.stdpath("data") .. "/lazy/tts.nvim/"
+      local script = plugin_dir .. "backends/edge.py"
+      -- Patch the shebang to use the venv python
+      local lines = vim.fn.readfile(script)
+      if lines[1] ~= "#!" .. venv_python then
+        lines[1] = "#!" .. venv_python
+        vim.fn.writefile(lines, script)
+      end
+      require("tts-nvim").setup(opts)
+    end,
+  },
+
+  {
+    "stevearc/aerial.nvim",
+    cmd = { "AerialToggle", "AerialOpen" },
+    keys = {
+      { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Outline" },
+    },
+    opts = {
+      layout = {
+        default_direction = "left",
+        min_width = 30,
+      },
+    },
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
